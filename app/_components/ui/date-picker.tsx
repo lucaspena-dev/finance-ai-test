@@ -5,19 +5,19 @@ import { ptBR } from 'date-fns/locale'
 import { Calendar as CalendarIcon } from 'lucide-react'
 import { SelectSingleEventHandler } from 'react-day-picker'
 
-import { cn } from '@/app/_lib/utils'
-import { Button } from './button'
-import { Calendar } from './calendar'
 import { Popover, PopoverContent, PopoverTrigger } from './popover'
+import { Button } from './button'
+import { cn } from '@/app/_lib/utils'
+import { Calendar } from './calendar'
 
-type DatePickerProps = {
+interface DatePickerProps {
   value?: Date
   onChange?: SelectSingleEventHandler
 }
 
 export const DatePicker = ({ value, onChange }: DatePickerProps) => {
   return (
-    <Popover>
+    <Popover modal>
       <PopoverTrigger asChild>
         <Button
           variant={'outline'}
@@ -39,7 +39,14 @@ export const DatePicker = ({ value, onChange }: DatePickerProps) => {
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-auto p-0">
-        <Calendar mode="single" selected={value} onSelect={onChange} initialFocus locale={ptBR} />
+        <Calendar
+          className="capitalize"
+          mode="single"
+          selected={value}
+          onSelect={onChange}
+          initialFocus
+          locale={ptBR}
+        />
       </PopoverContent>
     </Popover>
   )
