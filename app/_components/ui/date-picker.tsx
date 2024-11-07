@@ -10,10 +10,11 @@ import { Button } from './button'
 import { Calendar } from './calendar'
 import { Popover, PopoverContent, PopoverTrigger } from './popover'
 
-interface DatePickerProps {
+type DatePickerProps = {
   value?: Date
   onChange?: SelectSingleEventHandler
 }
+
 export const DatePicker = ({ value, onChange }: DatePickerProps) => {
   return (
     <Popover>
