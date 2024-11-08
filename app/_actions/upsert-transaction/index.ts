@@ -27,9 +27,9 @@ export async function upsertTransaction(params: UpsertTransactionParams) {
   addTransactionSchema.parse(params)
 
   await db.transaction.upsert({
-    where: { id: params.id || '' },
     create: { ...params, userId },
     update: { ...params, userId },
+    where: { id: params?.id ?? '' },
   })
   revalidatePath('/transactions')
 }
