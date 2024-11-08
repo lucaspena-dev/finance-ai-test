@@ -1,9 +1,9 @@
 import { auth } from '@clerk/nextjs/server'
 import { redirect } from 'next/navigation'
 
-import Navbar from './_components/navbar'
+import Navbar from '../_components/navbar'
 
-async function HomePage() {
+async function SubscriptionPage() {
   const { userId } = await auth()
 
   if (!userId) {
@@ -13,4 +13,4 @@ async function HomePage() {
   return <Navbar />
 }
 
-export default HomePage
+export default SubscriptionPage
