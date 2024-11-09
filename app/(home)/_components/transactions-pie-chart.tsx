@@ -63,12 +63,18 @@ function TransactionsPieChart({
   return (
     <Card className="flex flex-col p-2 lg:p-4 xl:p-6 2xl:p-12">
       <CardContent className="flex-1 pb-0">
-        <ChartContainer config={chartConfig} className="mx-auto aspect-square max-h-[250px]">
-          <PieChart>
-            <ChartTooltip cursor={false} content={<ChartTooltipContent hideLabel />} />
-            <Pie data={chartData} dataKey="amount" nameKey="type" innerRadius={60} />
-          </PieChart>
-        </ChartContainer>
+        {!depositsTotal && !investmentsTotal && !expensesTotal ? (
+          <div className="mb-6 flex items-center justify-center">
+            <span className="text-center font-bold">Nenhuma transação encontrada.</span>
+          </div>
+        ) : (
+          <ChartContainer config={chartConfig} className="mx-auto aspect-square max-h-[250px]">
+            <PieChart>
+              <ChartTooltip cursor={false} content={<ChartTooltipContent hideLabel />} />
+              <Pie data={chartData} dataKey="amount" nameKey="type" innerRadius={60} />
+            </PieChart>
+          </ChartContainer>
+        )}
         <div className="space-y-3">
           <PercentageItem
             icon={<TrendingUpIcon size={16} className="text-primary" />}

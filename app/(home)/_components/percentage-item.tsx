@@ -11,7 +11,7 @@ function PercentageItem({ icon, title, value }: PercentageItemProps) {
         {icon}
         <p className="text-sm text-muted-foreground">{title}</p>
       </div>
-      <span className="text-sm font-bold">{value}%</span>
+      <span className="text-sm font-bold">{!value ? 0 : value}%</span>
     </div>
   )
 }

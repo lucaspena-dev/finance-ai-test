@@ -7,6 +7,7 @@ import Navbar from '../_components/navbar'
 import SummaryCards from './_components/summary-cards'
 import MonthSelect from './_components/month-select'
 import TransactionsPieChart from './_components/transactions-pie-chart'
+import ExpensesPerCategory from './_components/expenses-per-category'
 
 type HomeProps = {
   searchParams: {
@@ -42,6 +43,7 @@ async function HomePage({ searchParams: { month } }: HomeProps) {
             <SummaryCards {...dashboard} />
             <div className="grid grid-cols-3 grid-rows-1 gap-6">
               <TransactionsPieChart {...dashboard} />
+              <ExpensesPerCategory expensesPerCategory={dashboard.totalExpensePerCategory} />
             </div>
           </div>
         </div>
