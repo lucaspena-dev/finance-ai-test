@@ -61,8 +61,8 @@ function TransactionsPieChart({
   ]
 
   return (
-    <Card className="flex flex-col p-2 lg:p-4 xl:p-6 2xl:p-12">
-      <CardContent className="flex-1 pb-0">
+    <Card className="flex flex-col xl:px-7 2xl:px-6 2xl:py-6">
+      <CardContent className="flex-1 pb-6">
         {!depositsTotal && !investmentsTotal && !expensesTotal ? (
           <div className="mb-6 flex items-center justify-center">
             <span className="text-center font-bold">Nenhuma transação encontrada.</span>
