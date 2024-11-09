@@ -3,6 +3,8 @@
 import { Transaction } from '@prisma/client'
 import { ColumnDef } from '@tanstack/react-table'
 import { Trash2Icon } from 'lucide-react'
+import { format } from 'date-fns'
+import { ptBR } from 'date-fns/locale'
 
 import TransactionTypeBadge from '../_components/type-badge'
 import {
@@ -12,6 +14,66 @@ import {
 import EditTransactionButton from '../_components/edit-transaction-button'
 import { Button } from '@/app/_components/ui/button'
 import { formatCurrency } from '@/app/_utils/currency'
+
+const MONTH_OPTIONS = [
+  {
+    value: 'janeiro',
+    label: 'Janeiro',
+  },
+  {
+    value: 'fevereiro',
+    label: 'Fevereiro',
+  },
+  {
+    value: 'marco',
+    label: 'Março',
+  },
+  {
+    value: 'abril',
+    label: 'Abril',
+  },
+  {
+    value: 'maio',
+    label: 'Maio',
+  },
+  {
+    value: 'junho',
+    label: 'Junho',
+  },
+  {
+    value: 'julho',
+    label: 'Julho',
+  },
+  {
+    value: 'agosto',
+    label: 'Agosto',
+  },
+  {
+    value: 'setembro',
+    label: 'Setembro',
+  },
+  {
+    value: 'outubro',
+    label: 'Outubro',
+  },
+  {
+    value: 'novembro',
+    label: 'Novembro',
+  },
+  {
+    value: 'dezembro',
+    label: 'Dezembro',
+  },
+]
+
+function formatMonth(date: string) {
+  for (let i = 0; i < MONTH_OPTIONS.length; i++) {
+    if (date.includes(MONTH_OPTIONS[i].value)) {
+      return date.replace(MONTH_OPTIONS[i].value, MONTH_OPTIONS[i].label)
+    }
+  }
+  return date
+}
 
 export const transactionsColumns: ColumnDef<Transaction>[] = [
   {
@@ -43,11 +105,11 @@ export const transactionsColumns: ColumnDef<Transaction>[] = [
     accessorKey: 'date',
     header: 'Data',
     cell: ({ row: { original: transaction } }) => {
-      return new Date(transaction.date).toLocaleDateString('pt-BR', {
-        day: '2-digit',
-        month: 'long',
-        year: 'numeric',
+      const formattedDate = format(new Date(transaction.date), `dd 'de' MMMM, yyyy`, {
+        locale: ptBR,
       })
+
+      return formatMonth(formattedDate)
     },
   },
   {

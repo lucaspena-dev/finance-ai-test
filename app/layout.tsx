@@ -21,7 +21,9 @@ export default function RootLayout({
   return (
     <html lang="pt-br">
       <body className={`${font.className} dark antialiased`}>
-        <ClerkProvider appearance={{ baseTheme: dark }}>{children}</ClerkProvider>
+        <ClerkProvider appearance={{ baseTheme: dark }}>
+          <div className="flex h-full flex-col overflow-hidden">{children}</div>
+        </ClerkProvider>
       </body>
     </html>
   )

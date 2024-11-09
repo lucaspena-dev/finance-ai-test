@@ -1,6 +1,8 @@
 import { Transaction } from '@prisma/client'
 import Link from 'next/link'
 import Image from 'next/image'
+import { format } from 'date-fns'
+import { ptBR } from 'date-fns/locale'
 
 import { Button } from '@/app/_components/ui/button'
 import { CardContent, CardHeader, CardTitle } from '@/app/_components/ui/card'
@@ -54,12 +56,8 @@ function LastTransactions({ lastTransactions }: LastTransactionsProps) {
                   </div>
                   <div>
                     <p className="text-sm font-bold">{transaction.name}</p>
-                    <p className="text-sm text-muted-foreground">
-                      {new Date(transaction.date).toLocaleDateString('pt-BR', {
-                        day: '2-digit',
-                        month: 'short',
-                        year: 'numeric',
-                      })}
+                    <p className="text-sm capitalize text-muted-foreground">
+                      {format(new Date(transaction.createdAt), 'dd MMM, yyyy', { locale: ptBR })}
                     </p>
                   </div>
                 </div>
