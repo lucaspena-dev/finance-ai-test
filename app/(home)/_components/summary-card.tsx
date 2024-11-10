@@ -1,5 +1,4 @@
 import AddTransactionButton from '@/app/_components/add-transaction-button'
-
 import { Card, CardHeader, CardContent } from '@/app/_components/ui/card'
 import { formatCurrency } from '@/app/_utils/currency'
 
@@ -8,9 +7,16 @@ type SummaryCardProps = {
   title: string
   amount: number
   size?: 'small' | 'large'
+  userCanAddTransaction?: boolean
 }
 
-async function SummaryCard({ icon, title, amount, size = 'small' }: SummaryCardProps) {
+async function SummaryCard({
+  icon,
+  title,
+  amount,
+  size = 'small',
+  userCanAddTransaction,
+}: SummaryCardProps) {
   return (
     <Card className={`${size === 'large' ? 'bg-white bg-opacity-5' : ''}`}>
       <CardHeader className="flex-row items-center gap-3">
@@ -24,7 +30,7 @@ async function SummaryCard({ icon, title, amount, size = 'small' }: SummaryCardP
           {formatCurrency(Number(amount))}
         </p>
 
-        {size === 'large' && <AddTransactionButton />}
+        {size === 'large' && <AddTransactionButton userCanAddTransaction={userCanAddTransaction} />}
       </CardContent>
     </Card>
   )
