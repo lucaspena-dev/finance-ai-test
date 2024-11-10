@@ -1,4 +1,4 @@
-import { auth } from '@clerk/nextjs/server'
+import { auth, clerkClient } from '@clerk/nextjs/server'
 import { redirect } from 'next/navigation'
 import { isMatch, format } from 'date-fns'
 
@@ -31,6 +31,8 @@ async function HomePage({ searchParams: { month } }: HomeProps) {
   }
 
   const dashboard = await getDashboard(month)
+  const user = await clerkClient().users.getUser(userId)
+  const hasPremiumPlan = user.publicMetadata.subscriptionPlan === 'premium'
 
   return (
     <>
@@ -40,7 +42,7 @@ async function HomePage({ searchParams: { month } }: HomeProps) {
           <h1 className="text-2xl font-bold">Dashboard</h1>
 
           <div className="flex items-center gap-3">
-            <AiReportButton month={month} />
+            <AiReportButton month={month} hasPremiumPlan={hasPremiumPlan} />
             <MonthSelect />
           </div>
         </div>

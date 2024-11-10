@@ -45,7 +45,7 @@ export async function generateAiReport({ month }: GenerateAiReportSchema) {
             (transaction) =>
               `${transaction.date.toLocaleDateString('pt-BR')}-R$${transaction.amount}-${transaction.type}-${transaction.category}`
           )
-          .join(';')}`
+          .join(';')} OBS: Os investimentos são considerados como gastos e não despesas.`
 
   const model = genAi.getGenerativeModel({
     model: 'gemini-1.5-flash',
