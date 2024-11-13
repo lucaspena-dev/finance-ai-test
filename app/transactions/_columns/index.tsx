@@ -2,7 +2,6 @@
 
 import { Transaction } from '@prisma/client'
 import { ColumnDef } from '@tanstack/react-table'
-import { Trash2Icon } from 'lucide-react'
 import { format } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
 
@@ -12,8 +11,8 @@ import {
   TRANSACTION_PAYMENT_METHOD_LABELS,
 } from '@/app/_constants/transactions'
 import EditTransactionButton from '../_components/edit-transaction-button'
-import { Button } from '@/app/_components/ui/button'
 import { formatCurrency } from '@/app/_utils/currency'
+import DeleteTransactionButton from '../_components/delete-transaction-button'
 
 const MONTH_OPTIONS = [
   {
@@ -126,9 +125,7 @@ export const transactionsColumns: ColumnDef<Transaction>[] = [
       return (
         <div className="space-x-1">
           <EditTransactionButton transaction={transaction} />
-          <Button variant="ghost" size="icon" className="text-muted-foreground">
-            <Trash2Icon />
-          </Button>
+          <DeleteTransactionButton transactionId={transaction.id} />
         </div>
       )
     },

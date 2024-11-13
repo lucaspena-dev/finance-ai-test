@@ -25,6 +25,7 @@ import {
 } from '../_constants/transactions'
 import { DatePicker } from './ui/date-picker'
 import { upsertTransaction } from '../_actions/upsert-transaction'
+import { toast } from 'sonner'
 
 type UpsertTransactionDialogProps = {
   isOpen: boolean
@@ -75,9 +76,26 @@ function UpsertTransactionDialog({
     try {
       await upsertTransaction({ ...data, id: transactionId })
       setIsOpen(false)
+
+      if (isUpdate) {
+        toast.success('Transação atualizada com sucesso!')
+        form.reset()
+        return
+      }
+
+      toast.success('Transação criada com sucesso!')
       form.reset()
+      return
     } catch (error) {
-      console.log(error)
+      if (isUpdate) {
+        console.error(error)
+        toast.error('Ocorreu um erro ao atualizar a transação.')
+        return
+      }
+
+      console.error(error)
+      toast.error('Ocorreu um erro ao criar a transação.')
+      return
     }
   }
 
