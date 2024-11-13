@@ -36,7 +36,10 @@ async function TransactionsPage() {
           <AddTransactionButton userCanAddTransaction={userCanAddTransactions} />
         </div>
         <ScrollArea>
-          <DataTable columns={transactionsColumns} data={transactions} />
+          <DataTable
+            columns={transactionsColumns}
+            data={JSON.parse(JSON.stringify(transactions))}
+          />
         </ScrollArea>
       </div>
     </>
