@@ -2,6 +2,8 @@ import { z } from 'zod'
 import { TransactionType, TransactionCategory, TransactionPaymentMethod } from '@prisma/client'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
+import { useEffect } from 'react'
+import { toast } from 'sonner'
 
 import { Button } from './ui/button'
 import {
@@ -25,7 +27,6 @@ import {
 } from '../_constants/transactions'
 import { DatePicker } from './ui/date-picker'
 import { upsertTransaction } from '../_actions/upsert-transaction'
-import { toast } from 'sonner'
 
 type UpsertTransactionDialogProps = {
   isOpen: boolean
@@ -100,6 +101,15 @@ function UpsertTransactionDialog({
   }
 
   const isUpdate = Boolean(transactionId)
+
+  useEffect(() => {
+    if (defaultValues) {
+      form.reset({
+        ...defaultValues,
+        date: new Date(defaultValues.date),
+      })
+    }
+  }, [defaultValues, form])
 
   return (
     <Dialog
